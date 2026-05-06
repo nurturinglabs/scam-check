@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #fbf3e7;
+  --paper: #ffffff;
+  --ink: #1a1614;
+  --ink-soft: #5e564e;
+  --rule: #e6dccb;
+  --claret: #8a1d1d;
+  --claret-deep: #6e1414;
+  --moss: #2f5d3a;
+  --mustard: #9a6b1a;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 20% -10%, rgba(138, 29, 29, 0.05) 0px, transparent 45%),
+    radial-gradient(circle at 110% 110%, rgba(47, 93, 58, 0.05) 0px, transparent 45%);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background-color: rgba(138, 29, 29, 0.2);
+  color: var(--ink);
+}
+
+.serif {
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  letter-spacing: -0.01em;
+}
+
+.smallcaps {
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.12em;
+}

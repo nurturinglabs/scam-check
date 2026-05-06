@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "category": "courier",
+    "version": 1,
+    "last_updated": "2026-05-06"
+  },
+  "display": {
+    "label": "Courier / digital arrest",
+    "icon": "package",
+    "color": "#be123c",
+    "cards": [
+      {
+        "id": "courier-customs-fee",
+        "title": "'Parcel held by customs'",
+        "script": "Calls / WhatsApps saying a parcel in your name is held by customs and you must pay a fee to release it. Real customs sends a written notice, never collects fees by phone.",
+        "tags": ["Customs fee", "Threats", "Time pressure"],
+        "example": "Your courier is held by customs, pay ₹8000 to release or face arrest.",
+        "prevalence": "high"
+      },
+      {
+        "id": "courier-digital-arrest",
+        "title": "'Digital arrest' / CBI / ED call",
+        "script": "Caller claims to be CBI / ED / Mumbai Police, says a parcel in your name has narcotics or your Aadhaar is linked to a crime. Holds you on a video call and demands money. There is no such thing as a 'digital arrest' in Indian law.",
+        "tags": ["Digital arrest", "Fake CBI", "Video call hostage"],
+        "example": "FedEx parcel in your name has narcotics. CBI officer here. You are under digital arrest.",
+        "prevalence": "high"
+      },
+      {
+        "id": "courier-fir-fine",
+        "title": "Fake 'FIR' demanding instant payment",
+        "script": "Tells you an FIR is registered against you and demands an immediate transfer to 'settle' it. Real police never demand payment over phone.",
+        "tags": ["FIR threat", "Pay or arrest"],
+        "example": "I am from CBI, there is an FIR against you. Pay ₹50,000 immediately.",
+        "prevalence": "high"
+      }
+    ]
+  },
+  "signal_patterns": {
+    "parcel_held_by_customs": [
+      "\\bparcel\\s+(is\\s+)?(held|stuck|seized)\\b",
+      "\\bcourier\\s+(is\\s+)?(held|stuck|seized)\\b",
+      "\\bpackage\\s+(held|seized|detained)\\s+(at|by)\\s+customs\\b",
+      "\\bheld\\s+at\\s+customs\\b",
+      "\\bseized\\s+by\\s+customs\\b"
+    ],
+    "fedex_dhl_or_courier_named": [
+      "\\b(fedex|dhl|blue\\s*dart|dtdc|india\\s*post|ekart|delhivery)\\b"
+    ],
+    "digital_arrest_or_police_call": [
+      "\\bdigital\\s+arrest\\b",
+      "\\bcbi\\s+(officer|case|notice)\\b",
+      "\\bnarcotics\\s+(found|case)\\b",
+      "\\bdrugs?\\s+(found|in\\s+(your\\s+)?(parcel|package))\\b",
+      "\\billegal\\s+(items?|content|substance)\\s+(in\\s+)?(your\\s+)?(parcel|package)\\b",
+      "\\baadhaar\\s+(misuse|linked\\s+to\\s+(case|crime))\\b"
+    ]
+  },
+
+  "category_signal_weights": {
+    "parcel_held_by_customs": 4,
+    "fedex_dhl_or_courier_named": 1,
+    "digital_arrest_or_police_call": 4,
+    "threat_or_arrest_language": 3,
+    "mentions_courier_or_customs_fee": 4,
+    "personal_docs_requested": 2,
+    "secrecy_demanded": 2
+  },
+
+  "red_flag_rules": [
+    {
+      "id": "courier_held_pay_to_release",
+      "requires_all": ["parcel_held_by_customs"],
+      "requires_any": ["mentions_courier_or_customs_fee", "upfront_payment_demanded"],
+      "red_flag": "'Your parcel is held by customs, pay X to release' is a known scam. Indian customs never calls or WhatsApps you to demand fees. If a parcel is held, they send a written notice to your address.",
+      "severity": "high"
+    },
+    {
+      "id": "courier_digital_arrest",
+      "requires_any": ["digital_arrest_or_police_call"],
+      "red_flag": "'Digital arrest', 'narcotics found in your parcel', 'CBI/ED case' calls are 100% scams. There is no such thing as a 'digital arrest' in Indian law. Real police never demand money or hold you on a video call.",
+      "severity": "high"
+    },
+    {
+      "id": "courier_threat_for_payment",
+      "requires_all": ["threat_or_arrest_language"],
+      "requires_any": ["mentions_courier_or_customs_fee", "upfront_payment_demanded"],
+      "red_flag": "They are threatening arrest unless you pay. This is a fear-based scam. Hang up. Do not transfer money. Do not stay on the call.",
+      "severity": "high"
+    }
+  ],
+
+  "next_steps": [
+    "Hang up the call. Do not stay on a video call with anyone claiming to be police, CBI, ED or customs.",
+    "Do NOT transfer any money. Customs / police in India never collect fees on phone or WhatsApp.",
+    "Call 1930 and file a complaint at https://cybercrime.gov.in.",
+    "If they have a copy of your Aadhaar / PAN, file a complaint with the bank and freeze account access. Block the number."
+  ]
+}

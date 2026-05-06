@@ -1,0 +1,109 @@
+{
+  "metadata": {
+    "category": "loan",
+    "version": 1,
+    "last_updated": "2026-05-06"
+  },
+  "display": {
+    "label": "Loan scam",
+    "icon": "banknote",
+    "color": "#ea580c",
+    "cards": [
+      {
+        "id": "loan-advance-fee",
+        "title": "Pay 'GST' to release approved loan",
+        "script": "Says your loan is pre-approved and asks for a small upfront fee — GST, processing, insurance, refundable deposit — to release the funds. The funds never come.",
+        "tags": ["Advance fee", "Pre-approved", "Unsolicited"],
+        "example": "Personal loan approved! Send ₹1500 GST to release funds.",
+        "prevalence": "high"
+      },
+      {
+        "id": "loan-no-cibil",
+        "title": "'No documents, no CIBIL' loan",
+        "script": "Offers a loan with no documents and no credit check, asks for a processing fee. Either an illegal lending app that will harass and blackmail later, or a pure fee-collection scam.",
+        "tags": ["No CIBIL", "No documents", "Processing fee"],
+        "example": "Instant personal loan, no CIBIL check, no documents required. Pay ₹999 processing fee.",
+        "prevalence": "high"
+      },
+      {
+        "id": "loan-pan-claim",
+        "title": "'Upload PAN to claim loan benefit'",
+        "script": "Asks you to upload PAN / Aadhaar to 'claim' a loan benefit you didn't apply for. The goal is identity theft, often used to open fake accounts in your name.",
+        "tags": ["Document phishing", "Unsolicited"],
+        "example": "Upload this PAN copy to claim your loan benefit, no fee required.",
+        "prevalence": "medium"
+      }
+    ]
+  },
+  "signal_patterns": {
+    "loan_pre_approved_unprompted": [
+      "\\b(personal\\s+)?loan\\s+(pre[- ]?approved|approved|sanctioned)\\b",
+      "\\binstant\\s+(personal\\s+)?loan\\b",
+      "\\bloan\\s+(amount\\s+)?(ready|disbursed|credited)\\b",
+      "\\bloan\\s+offer\\s+(approved|ready)\\b"
+    ],
+    "loan_no_documents_required": [
+      "\\bno\\s+document(s)?\\s+(required|needed)\\b",
+      "\\bno\\s+cibil\\s+(check|score)?\\b",
+      "\\bbad\\s+cibil\\b",
+      "\\bno\\s+income\\s+proof\\b",
+      "\\bno\\s+(salary|payslip|bank\\s+statement)\\b"
+    ],
+    "legit_loan_context": [
+      "\\bloan\\s+application\\b",
+      "\\bvisit\\s+(?:your\\s+|the\\s+|our\\s+)?branch\\b",
+      "\\bloan\\s+account\\b",
+      "\\bloan\\s+benefit\\b",
+      "\\bloan\\s+officer\\b",
+      "\\bloan\\s+against\\s+(?:property|gold|fd)\\b",
+      "\\bemi\\s+(?:of|due|payment|reminder)\\b"
+    ]
+  },
+
+  "category_signal_weights": {
+    "loan_pre_approved_unprompted": 4,
+    "loan_no_documents_required": 3,
+    "mentions_processing_fee": 3,
+    "mentions_gst_or_tax_fee": 3,
+    "mentions_refundable_deposit": 2,
+    "personal_docs_requested": 3,
+    "whatsapp_only_contact": 1,
+    "legit_loan_context": 4,
+    "mentions_indian_bank": 2,
+    "loan_fee_before_disbursement": 4
+  },
+
+  "red_flag_rules": [
+    {
+      "id": "loan_advance_fee",
+      "requires_all": ["loan_pre_approved_unprompted"],
+      "requires_any": [
+        "mentions_processing_fee",
+        "mentions_gst_or_tax_fee",
+        "mentions_refundable_deposit",
+        "upfront_payment_demanded"
+      ],
+      "red_flag": "An 'approved loan' that asks you to pay processing fee / GST / insurance BEFORE the loan is disbursed is the classic advance-fee loan scam. RBI-licensed lenders deduct fees from the disbursement, never collect them upfront.",
+      "severity": "high"
+    },
+    {
+      "id": "loan_no_docs",
+      "requires_any": ["loan_no_documents_required"],
+      "red_flag": "'No documents, no CIBIL check' loans are not allowed under RBI rules. Either they are illegal lending apps (which harass and blackmail borrowers), or there is no loan at all and the goal is the upfront fee.",
+      "severity": "high"
+    },
+    {
+      "id": "loan_unprompted_offer",
+      "requires_all": ["loan_pre_approved_unprompted", "whatsapp_only_contact"],
+      "red_flag": "Unsolicited 'pre-approved loan' offers via WhatsApp are not how regulated banks or NBFCs operate. Verify the lender on the RBI list before doing anything.",
+      "severity": "medium"
+    }
+  ],
+
+  "next_steps": [
+    "Do not pay any processing / GST / insurance fee to 'release' a loan. RBI-regulated lenders never charge upfront.",
+    "Check whether the lender is on the RBI list of regulated entities: https://www.rbi.org.in/scripts/BS_NBFCList.aspx",
+    "Do not install loan apps from links sent over WhatsApp / SMS. Many of these apps photograph your contacts and harass them later.",
+    "If you have already paid: call 1930 and file at https://cybercrime.gov.in. Also report the lender at https://sachet.rbi.org.in/."
+  ]
+}

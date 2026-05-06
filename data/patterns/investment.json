@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "category": "investment",
+    "version": 1,
+    "last_updated": "2026-05-06"
+  },
+  "display": {
+    "label": "Investment scam",
+    "icon": "trending-up",
+    "color": "#7c3aed",
+    "cards": [
+      {
+        "id": "inv-guaranteed-returns",
+        "title": "'Guaranteed 20% returns' offer",
+        "script": "Promises a fixed or guaranteed return on your money. Even SEBI-registered advisors are barred from doing this — anyone who does is illegal.",
+        "tags": ["Guaranteed returns", "Unsolicited", "High pressure"],
+        "example": "Promising 20% returns on investment, deposit 5000 to start.",
+        "prevalence": "high"
+      },
+      {
+        "id": "inv-telegram-tip",
+        "title": "Telegram VIP tips / signals",
+        "script": "Adds you to a Telegram or WhatsApp 'VIP signals' group claiming sure-shot stock or crypto calls. Pump-and-dump or fake-app withdrawal trap.",
+        "tags": ["Telegram group", "Sure-shot tips", "Pump and dump"],
+        "example": "Sure shot stock tip today, target 5%. Join VIP signals group on Telegram.",
+        "prevalence": "high"
+      },
+      {
+        "id": "inv-crypto-app",
+        "title": "Trading app pushed by stranger",
+        "script": "Stranger on WhatsApp / Telegram shows profit screenshots, gets you to deposit on an unknown app. Early withdrawals work; then withdrawals are blocked and they ask for 'tax' or 'GST' to release funds.",
+        "tags": ["Profit screenshots", "Unknown app", "Withdrawal block"],
+        "example": "Made ₹5000 in one day trading crypto, join my Telegram group.",
+        "prevalence": "high"
+      },
+      {
+        "id": "inv-double-money",
+        "title": "'Double your money' / forex",
+        "script": "Promises to double your money in days or weeks via forex / crypto. No real investment exists.",
+        "tags": ["Double money", "Forex", "Risk-free"],
+        "example": "Double your money in 15 days! No risk forex trading. WhatsApp +91 9XXXXXXXXX.",
+        "prevalence": "medium"
+      }
+    ]
+  },
+  "signal_patterns": {
+    "stock_or_ipo_tip": [
+      "\\bstock\\s+(tip|tip\\s+today|target|recommendation)\\b",
+      "\\bipo\\s+(tip|allotment|grey\\s+market|gmp)\\b",
+      "\\b(mcx|nse|bse)\\s+(tip|signal|target)\\b",
+      "\\bsure\\s*shot\\s+(tip|target|profit)\\b"
+    ],
+    "pump_signals_group": [
+      "\\bsignal(s)?\\s+group\\b",
+      "\\bvip\\s+(group|signals?|members?)\\b",
+      "\\bpaid\\s+group\\b",
+      "\\bmentor(ship)?\\s+(group|class|program)\\b"
+    ],
+    "double_money_promise": [
+      "\\bdouble\\s+(your\\s+)?(money|investment|returns?)\\b",
+      "\\b3x\\b.*\\b(in|within)\\s+\\d+\\s+(day|week|month)\\b",
+      "\\b\\d+x\\s+(returns?|profit)\\b"
+    ]
+  },
+
+  "category_signal_weights": {
+    "guaranteed_returns": 4,
+    "guaranteed_high_returns": 5,
+    "daily_or_weekly_fixed_returns": 4,
+    "crypto_or_trading_app_mentioned": 3,
+    "telegram_only_contact": 3,
+    "stock_or_ipo_tip": 3,
+    "pump_signals_group": 3,
+    "double_money_promise": 4,
+    "double_money_promise_alias": 4,
+    "screenshots_of_profits": 4,
+    "mentions_processing_fee": 1,
+    "mentions_gst_or_tax_fee": 1,
+    "mentions_legitimate_finance_product": 4,
+    "mentions_indian_bank": 1
+  },
+
+  "red_flag_rules": [
+    {
+      "id": "investment_guaranteed_returns",
+      "requires_any": ["guaranteed_returns", "daily_or_weekly_fixed_returns", "double_money_promise"],
+      "red_flag": "They are promising guaranteed / fixed / 'double your money' returns. SEBI bars Indian investment advisors from guaranteeing returns. This is a Ponzi or pump-and-dump pattern.",
+      "severity": "high"
+    },
+    {
+      "id": "investment_telegram_signals",
+      "requires_any": ["pump_signals_group", "telegram_only_contact"],
+      "red_flag": "Telegram tip/signal groups offering 'sure-shot' calls are pump-and-dump or Ponzi setups. Anyone you can't verify on the SEBI Investment Adviser registry is operating illegally.",
+      "severity": "high"
+    },
+    {
+      "id": "investment_random_app",
+      "requires_any": ["crypto_or_trading_app_mentioned"],
+      "requires_all_of_any": ["whatsapp_only_contact", "telegram_only_contact"],
+      "red_flag": "An unknown crypto / forex / trading app being pushed via WhatsApp or Telegram is the classic 'task-trading' scam — early withdrawals work, then you can't withdraw and they ask for tax/GST to release funds.",
+      "severity": "high"
+    },
+    {
+      "id": "investment_release_tax",
+      "requires_all": ["mentions_gst_or_tax_fee", "guaranteed_returns"],
+      "red_flag": "Asking for GST / income tax to 'release' your profits is a classic withdrawal-block scam. Real platforms deduct TDS from the payout, never ask you to pay first.",
+      "severity": "high"
+    }
+  ],
+
+  "next_steps": [
+    "Do not invest. Never deposit money to an app or person you found via Telegram, WhatsApp or unsolicited SMS.",
+    "Verify any 'investment advisor' on the SEBI registry: https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes",
+    "Report suspicious investment schemes on the RBI Sachet portal: https://sachet.rbi.org.in/",
+    "If you have already paid: call 1930 (cyber helpline) and file at https://cybercrime.gov.in. Speed matters — your bank can sometimes block the transfer in the first hours."
+  ]
+}

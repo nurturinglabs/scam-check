@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "category": "job",
+    "version": 1,
+    "last_updated": "2026-05-06"
+  },
+  "display": {
+    "label": "Job scam",
+    "icon": "briefcase",
+    "color": "#dc2626",
+    "cards": [
+      {
+        "id": "job-data-entry",
+        "title": "Data entry, ₹15K/month for 2 hours",
+        "script": "Promises easy work-from-home job (data entry, form filling, copy-paste). Asks for a registration / training / kit fee before you can start. The 'job' does not exist.",
+        "tags": ["Upfront fee", "Too good to be true", "WhatsApp only"],
+        "example": "Data entry job, 2 hrs/day, ₹15K/month. Send 250 registration fee on WhatsApp.",
+        "prevalence": "high"
+      },
+      {
+        "id": "job-aadhaar-wfh",
+        "title": "WFH offer asking for Aadhaar / PAN",
+        "script": "Tells you you've been 'shortlisted' for a work-from-home role and asks you to send a photo of Aadhaar / PAN to verify before the offer letter.",
+        "tags": ["Document phishing", "Unsolicited", "WhatsApp only"],
+        "example": "Work from home opportunity, send your Aadhaar and PAN to this WhatsApp.",
+        "prevalence": "high"
+      },
+      {
+        "id": "job-training-kit",
+        "title": "'Training kit' before joining",
+        "script": "Offer comes with a high salary and 'limited slots'. To start, you must pay a 'one-time training kit' or 'starter kit' fee.",
+        "tags": ["Upfront fee", "Urgency", "Unrealistic pay"],
+        "example": "Limited slots! Earn ₹50,000/month, pay ₹2000 for training kit today only.",
+        "prevalence": "high"
+      },
+      {
+        "id": "job-direct-offer",
+        "title": "'Direct selection' without interview",
+        "script": "An offer letter without an interview, signed by an HR you can't verify. Asks for 'GST charges' to release the offer letter.",
+        "tags": ["No interview", "Upfront fee", "Fake offer letter"],
+        "example": "Congratulations! Offer letter ready. Pay ₹800 GST charges to receive the offer letter.",
+        "prevalence": "medium"
+      }
+    ]
+  },
+  "signal_patterns": {
+    "data_entry_or_form_filling": [
+      "\\bdata\\s+entry\\b",
+      "\\bform\\s+filling\\b",
+      "\\btype\\s+work\\b",
+      "\\bcaptcha\\s+(typing|entry|filling|work)\\b",
+      "\\bcopy[- ]paste\\s+(work|job)\\b"
+    ],
+    "work_from_home_promised": [
+      "\\bwork\\s+from\\s+home\\b",
+      "\\bwfh\\b",
+      "\\bhome[- ]?based\\s+(job|work)\\b",
+      "\\bonline\\s+(job|work|earning)\\b"
+    ],
+    "no_experience_required": [
+      "\\bno\\s+experience\\s+(required|needed)\\b",
+      "\\b(freshers?|housewife|housewives|students?)\\s+(welcome|apply|can\\s+apply)\\b",
+      "\\bany\\s+qualification\\b",
+      "\\b10th\\s+pass\\b.*\\bapply\\b",
+      "\\b12th\\s+pass\\b.*\\bapply\\b"
+    ],
+    "interview_skipped": [
+      "\\bdirect(ly)?\\s+(joining|select(ed|ion))\\b",
+      "\\bno\\s+interview\\b",
+      "\\boffer\\s+letter\\s+ready\\b",
+      "\\bjoin(ing)?\\s+immediately\\b"
+    ],
+    "part_time_few_hours_high_pay": [
+      "\\b\\d+\\s*(hr|hrs|hour|hours)/?\\s*day\\b",
+      "\\bpart[- ]?time\\b",
+      "\\b1[- ]?2\\s+(hr|hrs|hour|hours)\\b",
+      "\\b2[- ]?3\\s+(hr|hrs|hour|hours)\\b"
+    ],
+    "mentions_job_word": [
+      "\\b(?:a\\s+|the\\s+|this\\s+|new\\s+|that\\s+)?job\\b",
+      "\\bcareer\\b",
+      "\\bvacancy\\b",
+      "\\bhiring\\b",
+      "\\bopening\\b",
+      "\\bemployment\\b"
+    ],
+    "legit_job_context": [
+      "\\bwalk[- ]?in\\s+interview\\b",
+      "\\bwalk[- ]?in\\s+(?:tomorrow|today|on|at)\\b",
+      "\\bbring\\s+(your\\s+)?(resume|cv)\\b",
+      "\\binterview\\s+(at|on|in|for)\\b",
+      "\\boffice\\s+address\\b",
+      "\\bshortlisted\\b",
+      "\\bhr\\s+round\\b",
+      "\\bcompany\\s+(office|address|website)\\b",
+      "\\b(?:our|at\\s+our)\\s+\\w+\\s+office\\b",
+      "\\bdelivery\\s+(?:partner|boy|executive|associate|driver|rider)\\b",
+      "\\bfield\\s+(?:executive|sales)\\b"
+    ]
+  },
+
+  "category_signal_weights": {
+    "data_entry_or_form_filling": 4,
+    "work_from_home_promised": 3,
+    "no_experience_required": 2,
+    "interview_skipped": 2,
+    "part_time_few_hours_high_pay": 2,
+    "mentions_registration_fee": 3,
+    "mentions_training_fee": 3,
+    "mentions_security_deposit": 2,
+    "mentions_refundable_deposit": 2,
+    "mentions_processing_fee": 2,
+    "unrealistic_pay_for_effort": 3,
+    "personal_docs_requested": 1,
+    "whatsapp_only_contact": 1,
+    "legit_job_context": 4,
+    "payment_for_job_offer": 3,
+    "mentions_job_word": 2
+  },
+
+  "red_flag_rules": [
+    {
+      "id": "job_upfront_fee",
+      "requires_any": [
+        "mentions_registration_fee",
+        "mentions_training_fee",
+        "mentions_security_deposit",
+        "mentions_refundable_deposit",
+        "mentions_processing_fee",
+        "mentions_gst_or_tax_fee"
+      ],
+      "red_flag": "They are asking for money upfront (registration / training / deposit / GST). Genuine employers in India NEVER ask candidates to pay any fee. This is illegal under the Indian Employment Exchanges Act.",
+      "severity": "high"
+    },
+    {
+      "id": "job_too_good_to_be_true_pay",
+      "requires_any": ["unrealistic_pay_for_effort"],
+      "red_flag": "The pay vs the work hours is too good to be true (e.g. ₹15K/month for 2 hours/day). No legitimate Indian employer pays this rate for unskilled part-time work.",
+      "severity": "high"
+    },
+    {
+      "id": "job_data_entry_with_fee",
+      "requires_all": ["data_entry_or_form_filling", "upfront_payment_demanded"],
+      "red_flag": "'Data entry job + small fee' is one of the most common scam patterns in India. The 'job' does not exist — they take the fee and disappear, or escalate to bigger fees.",
+      "severity": "high"
+    },
+    {
+      "id": "job_direct_offer_no_interview",
+      "requires_all": ["interview_skipped", "work_from_home_promised"],
+      "red_flag": "Real employers run an interview before sending an offer letter. 'Selected directly' work-from-home offers are almost always fake.",
+      "severity": "medium"
+    },
+    {
+      "id": "job_offplatform_only",
+      "requires_all": ["whatsapp_only_contact", "work_from_home_promised"],
+      "red_flag": "They want you to deal only on WhatsApp with no company website, office address, or HR email. Real employers have a verifiable presence.",
+      "severity": "medium"
+    }
+  ],
+
+  "next_steps": [
+    "Do not pay any 'registration', 'training' or 'kit' fee. No genuine job in India requires this.",
+    "Ask for the company's website, office address, and an official email (not @gmail.com / @yahoo.com). Search the company on Google + LinkedIn before responding.",
+    "If they have already taken money: file a complaint at https://cybercrime.gov.in or call 1930.",
+    "Report the message as spam on WhatsApp (long-press → Report)."
+  ]
+}

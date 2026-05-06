@@ -1,0 +1,166 @@
+{
+  "fixtures": [
+    {
+      "id": "01-job-data-entry-fee-unsolicited",
+      "text": "Got a WhatsApp from unknown number: data entry job, 2 hrs/day, ₹15K/month. Send 250 registration fee to start.",
+      "expected_category": "job",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": true,
+      "expected_red_flags_must_include": ["instant_payment_for_unsolicited_job"]
+    },
+    {
+      "id": "02-investment-20pct-returns-REGRESSION",
+      "text": "Someone contacted me promising 20% returns on investment, deposit 5000 to start.",
+      "expected_category": "investment",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": true,
+      "expected_red_flags_must_include": ["instant_guaranteed_high_returns"]
+    },
+    {
+      "id": "03-investment-crypto-telegram",
+      "text": "Made ₹5000 in one day trading crypto, join my Telegram group.",
+      "expected_category": "investment",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": true,
+      "expected_red_flags_must_include": ["instant_crypto_or_trading_pump_via_telegram"]
+    },
+    {
+      "id": "04-loan-pre-approved-gst",
+      "text": "Personal loan approved! Send ₹1500 GST to release funds.",
+      "expected_category": "loan",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": true,
+      "expected_red_flags_must_include": ["instant_loan_fee_before_disbursement"]
+    },
+    {
+      "id": "05-task-amazon-recharge",
+      "text": "Rate products on Amazon, ₹50 per task. Recharge ₹500 to unlock bigger tasks.",
+      "expected_category": "task",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": true,
+      "expected_red_flags_must_include": ["instant_pay_to_unlock_earnings"]
+    },
+    {
+      "id": "06-courier-customs-pay",
+      "text": "Your courier is held by customs, pay ₹8000 to release or face arrest.",
+      "expected_category": "courier",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": true,
+      "expected_red_flags_must_include": ["instant_arrest_threat"]
+    },
+    {
+      "id": "07-courier-cbi-fir",
+      "text": "I am from CBI, there is an FIR against you. Pay ₹50000 immediately.",
+      "expected_category": "courier",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": true,
+      "expected_red_flags_must_include": ["instant_arrest_threat"]
+    },
+    {
+      "id": "08-job-wfh-aadhaar-pan-wa",
+      "text": "Work from home opportunity, send your Aadhaar and PAN to this WhatsApp.",
+      "expected_category": "job",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": false,
+      "expected_red_flags_must_include": ["common_aadhaar_pan_request"]
+    },
+    {
+      "id": "09-investment-screenshots-telegram",
+      "text": "Investment opportunity, see attached profit screenshots, contact on Telegram.",
+      "expected_category": "investment",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": true,
+      "expected_red_flags_must_include": ["instant_crypto_or_trading_pump_via_telegram"]
+    },
+    {
+      "id": "10-legit-walkin-job",
+      "text": "Walk-in interview at our Bangalore office Monday 10am, bring resume. No fee.",
+      "expected_category": "job",
+      "expected_verdict": "probably_safe",
+      "expected_severity": "low",
+      "expected_instant_fail": false,
+      "expected_red_flags_must_include": []
+    },
+    {
+      "id": "11-legit-loan-sbi-branch",
+      "text": "Your loan application has been approved at SBI, please visit your branch.",
+      "expected_category": "loan",
+      "expected_verdict": "probably_safe",
+      "expected_severity": "low",
+      "expected_instant_fail": false,
+      "expected_red_flags_must_include": []
+    },
+    {
+      "id": "12-legit-fd-hdfc",
+      "text": "Fixed deposit at HDFC Bank with 7.2% interest, T&C apply.",
+      "expected_category": "investment",
+      "expected_verdict": "probably_safe",
+      "expected_severity": "low",
+      "expected_instant_fail": false,
+      "expected_red_flags_must_include": []
+    },
+    {
+      "id": "13-job-limited-slots-training-kit",
+      "text": "Limited slots! Earn ₹50000 per month, pay ₹2000 for training kit today only.",
+      "expected_category": "job",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": false,
+      "expected_red_flags_must_include": ["job_upfront_fee"]
+    },
+    {
+      "id": "14-loan-pan-claim",
+      "text": "Upload this PAN copy to claim your loan benefit, no fee required.",
+      "expected_category": "loan",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": false,
+      "expected_red_flags_must_include": ["common_aadhaar_pan_request"]
+    },
+    {
+      "id": "15-investment-stock-guaranteed-50pct",
+      "text": "Buy this stock now, guaranteed 50% return in 1 month, SEBI registered advisor.",
+      "expected_category": "investment",
+      "expected_verdict": "likely_scam",
+      "expected_severity": "high",
+      "expected_instant_fail": true,
+      "expected_red_flags_must_include": ["instant_guaranteed_high_returns"]
+    },
+    {
+      "id": "16-legit-delivery-walkin",
+      "text": "Need a delivery partner, ₹500 per day, walk-in tomorrow at our Hubli office.",
+      "expected_category": "job",
+      "expected_verdict": "probably_safe",
+      "expected_severity": "low",
+      "expected_instant_fail": false,
+      "expected_red_flags_must_include": []
+    },
+    {
+      "id": "17-ambiguous-urgency-only",
+      "text": "Limited slots today only, apply now for part time work.",
+      "expected_category": "job",
+      "expected_verdict": "need_more_info",
+      "expected_severity": "medium",
+      "expected_instant_fail": false,
+      "expected_red_flags_must_include": ["common_urgency"]
+    },
+    {
+      "id": "18-ambiguous-wa-only",
+      "text": "Got a WhatsApp number to call about a job, no other details given.",
+      "expected_category": "job",
+      "expected_verdict": "need_more_info",
+      "expected_severity": "medium",
+      "expected_instant_fail": false,
+      "expected_red_flags_must_include": []
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "category": "task",
+    "version": 1,
+    "last_updated": "2026-05-06"
+  },
+  "display": {
+    "label": "Task scam",
+    "icon": "list-checks",
+    "color": "#0891b2",
+    "cards": [
+      {
+        "id": "task-amazon-rate",
+        "title": "'₹50 per Amazon review' tasks",
+        "script": "Pays small amounts (₹30–₹100) for liking videos / rating products. Once you trust the payouts, asks you to deposit money to 'unlock bigger tasks'. Deposit is never returned.",
+        "tags": ["Pay-to-unlock", "Telegram group", "Initial bait payouts"],
+        "example": "Rate products on Amazon, ₹50 per task. Recharge ₹500 to unlock bigger tasks.",
+        "prevalence": "high"
+      },
+      {
+        "id": "task-youtube-like",
+        "title": "'₹50 per YouTube like'",
+        "script": "Telegram or WhatsApp group offering ₹30–₹50 per like / subscribe. Entry stage of the merchant-task scam.",
+        "tags": ["Telegram group", "Like-and-earn"],
+        "example": "Earn ₹50 per like on YouTube videos. Daily simple tasks. Join Telegram group.",
+        "prevalence": "high"
+      },
+      {
+        "id": "task-merchant-deposit",
+        "title": "'Merchant tasks' with deposit",
+        "script": "VIP / merchant task site with tiered payouts. To 'unlock' the next tier you must deposit a larger amount. Funds never withdrawable.",
+        "tags": ["Pay-to-unlock", "VIP tiers", "Withdrawal block"],
+        "example": "Complete merchant task daily. Deposit ₹1000 to start, earn 30% returns. VIP group only.",
+        "prevalence": "medium"
+      }
+    ]
+  },
+  "signal_patterns": {
+    "like_subscribe_review_task": [
+      "\\b(like|liking)\\s+(youtube\\s+)?videos?\\b",
+      "\\b(subscribe|subscribing)\\s+(youtube\\s+)?channel(s)?\\b",
+      "\\b(review|rate|rating)\\s+(products?|hotels?|restaurants?)\\b",
+      "\\b(google|amazon|flipkart)\\s+review\\b",
+      "\\bper\\s+(like|subscribe|review|task|video)\\b",
+      "\\b(?:rs\\.?\\s*|₹\\s*)?\\d+\\s+per\\s+(like|subscribe|review|task|video)\\b"
+    ],
+    "rate_or_review_products_task": [
+      "\\brate\\s+products?\\s+on\\s+(amazon|flipkart|myntra)\\b",
+      "\\b\\d+\\s+per\\s+task\\b",
+      "\\b(complete\\s+)?(simple\\s+)?tasks?\\s+(daily|every\\s+day)\\b"
+    ],
+    "merchant_task_unlock": [
+      "\\b(unlock|upgrade)\\s+(big|premium|vip|level\\s*\\d+)\\s+task\\b",
+      "\\bmerchant\\s+(task|order)\\b",
+      "\\bdeposit\\s+(to\\s+)?(unlock|start|continue)\\b",
+      "\\brecharge\\s+(to\\s+)?(unlock|start|continue)\\b"
+    ]
+  },
+
+  "category_signal_weights": {
+    "like_subscribe_review_task": 4,
+    "rate_or_review_products_task": 4,
+    "merchant_task_unlock": 4,
+    "mentions_recharge_or_topup": 3,
+    "telegram_only_contact": 2,
+    "whatsapp_only_contact": 1,
+    "guaranteed_returns": 1,
+    "unrealistic_pay_for_effort": 2
+  },
+
+  "red_flag_rules": [
+    {
+      "id": "task_pay_to_unlock",
+      "requires_any": ["merchant_task_unlock", "mentions_recharge_or_topup"],
+      "red_flag": "Real micro-task work never asks YOU to deposit money to 'unlock' bigger tasks. This is the 'merchant task' / 'prepaid task' scam. Initial small payouts are bait. Your deposit will never be returned.",
+      "severity": "high"
+    },
+    {
+      "id": "task_like_review_for_pay",
+      "requires_any": ["like_subscribe_review_task", "rate_or_review_products_task"],
+      "red_flag": "'Like a video / rate a product for ₹50' jobs sent via WhatsApp / Telegram are the entry stage of the merchant-task scam. Even if first payouts come, the next stage will demand a deposit.",
+      "severity": "medium"
+    }
+  ],
+
+  "next_steps": [
+    "Do not deposit any amount to 'unlock' bigger tasks. The deposit is never returned.",
+    "Stop all communication, leave any Telegram / WhatsApp groups they added you to, and block the contact.",
+    "If you have already deposited money: call 1930 immediately and file at https://cybercrime.gov.in. Faster reporting = better chance the bank can hold the transfer."
+  ]
+}

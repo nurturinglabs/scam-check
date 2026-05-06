@@ -1,0 +1,319 @@
+{
+  "metadata": {
+    "category": "common",
+    "version": 1,
+    "last_updated": "2026-05-06"
+  },
+  "signal_patterns": {
+    "mentions_registration_fee": [
+      "\\bregistration\\s+fee(s)?\\b",
+      "\\breg(n|istration)?\\.?\\s+(fee|charges|amount)\\b",
+      "\\bjoining\\s+(fee|amount|charges)\\b",
+      "\\bonboarding\\s+fee\\b",
+      "\\bsign[- ]?up\\s+fee\\b"
+    ],
+    "mentions_security_deposit": [
+      "\\bsecurity\\s+deposit\\b",
+      "\\brefundable\\s+deposit\\b",
+      "\\bcaution\\s+deposit\\b"
+    ],
+    "mentions_training_fee": [
+      "\\btraining\\s+(fee|charges|cost|amount|kit)\\b",
+      "\\bcourse\\s+(fee|charges)\\b",
+      "\\bkit\\s+(fee|charges|amount)\\b",
+      "\\bpay\\s+(?:rs\\.?\\s*|₹\\s*)?\\d+\\s+for\\s+training\\b",
+      "\\bfor\\s+training\\s+kit\\b"
+    ],
+    "mentions_gst_or_tax_fee": [
+      "\\bgst\\s+(charges|fee|amount|payment|to\\s+release)\\b",
+      "\\b(?:rs\\.?\\s*|₹\\s*)?\\d+\\s+gst\\b",
+      "\\bsend\\s+\\d+\\s+gst\\b",
+      "\\btds\\s+(amount|charges|fee)\\b",
+      "\\btax\\s+(charges|fee|payment|deposit)\\b",
+      "\\b(income\\s+)?tax\\s+clearance\\b"
+    ],
+    "mentions_processing_fee": [
+      "\\bprocessing\\s+(fee|charges|amount)\\b",
+      "\\bservice\\s+(fee|charges)\\b",
+      "\\bverification\\s+(fee|charges)\\b",
+      "\\bfile\\s+(charges|fee)\\b"
+    ],
+    "mentions_refundable_deposit": [
+      "\\brefundable\\b",
+      "\\bdeposit\\s+(will\\s+be\\s+)?refunded\\b",
+      "\\b(100\\s*%|fully)\\s+refundable\\b"
+    ],
+    "mentions_recharge_or_topup": [
+      "\\brecharge\\b",
+      "\\btop[- ]?up\\b",
+      "\\bwallet\\s+(recharge|top\\s*up|load)\\b",
+      "\\badd\\s+(money|funds|balance)\\s+(to\\s+)?(wallet|account)\\b"
+    ],
+    "mentions_courier_or_customs_fee": [
+      "\\bcustom(s)?\\s+(duty|charges|fee|clearance)\\b",
+      "\\bcourier\\s+(charges|fee|payment)\\b",
+      "\\bparcel\\s+(charges|release|customs)\\b",
+      "\\bpay\\s+(?:rs\\.?\\s*|₹\\s*)?\\d+[k]?\\s+to\\s+release\\b",
+      "\\bto\\s+release\\s+(your\\s+)?(parcel|courier|package|amount|funds?)\\b",
+      "\\brelease\\s+(charges|fee|amount|payment)\\b"
+    ],
+
+    "whatsapp_only_contact": [
+      "\\bonly\\s+on\\s+whats\\s*app\\b",
+      "\\bwhats\\s*app\\s+(only|us|me|now)\\b",
+      "\\bcontact\\s+(us\\s+)?on\\s+whats\\s*app\\b",
+      "\\bsend\\s+(message|msg)\\s+on\\s+whats\\s*app\\b",
+      "\\bwhats\\s*app\\s+\\+?\\d{2,}",
+      "\\bwhats\\s*app\\s+number\\b",
+      "\\bsend\\s+(?:your\\s+)?\\w+\\s+(?:to\\s+)?this\\s+whats\\s*app\\b",
+      "\\bto\\s+this\\s+whats\\s*app\\b"
+    ],
+    "telegram_only_contact": [
+      "\\bjoin\\s+(my\\s+|our\\s+)?telegram\\b",
+      "\\btelegram\\s+(group|channel|link|invite)\\b",
+      "\\bt\\.me/",
+      "\\btelegram\\s+(only|us|me)\\b",
+      "\\b(?:contact|reach|message)\\s+(?:us\\s+|me\\s+)?(?:on|via|through)\\s+telegram\\b",
+      "\\b(?:on|via|through)\\s+telegram\\b"
+    ],
+    "personal_phone_for_official": [
+      "\\bcall\\s+me\\s+(on\\s+|at\\s+)?\\+?\\d{6,}",
+      "\\bdm\\s+me\\b",
+      "\\binbox\\s+me\\b"
+    ],
+
+    "personal_docs_requested": [
+      "\\bsend\\s+(your\\s+)?aadhaar\\b",
+      "\\bshare\\s+(your\\s+)?aadhaar\\b",
+      "\\baadhaar\\s+(card\\s+)?(copy|number|photo)\\b",
+      "\\bsend\\s+(your\\s+)?pan\\s+(card|number)\\b",
+      "\\bshare\\s+(your\\s+)?pan\\b",
+      "\\bphoto\\s+of\\s+(aadhaar|pan|driving\\s+licen[cs]e|passport)\\b",
+      "\\b(?:send|upload|share|forward)\\s+(?:your\\s+|this\\s+)?(?:aadhaar|aadhar|pan)\\s+(?:and|or|,)?\\s*(?:pan|aadhaar|aadhar)?\\b",
+      "\\bupload\\s+(?:your\\s+|this\\s+)?(?:pan|aadhaar|aadhar|driving\\s+licen[cs]e|passport)\\b",
+      "\\b(?:pan|aadhaar|aadhar)\\s+copy\\b",
+      "\\baadhaar\\s+and\\s+pan\\b",
+      "\\bpan\\s+and\\s+aadhaar\\b",
+      "\\b(?:ask|asks|asking|asked|wants?|wanting|wanted|need|needs|needing|needed|requesting|requested|demand|demands|demanding)\\s+(?:for\\s+)?(?:my\\s+|your\\s+|the\\s+)?(?:aadhaar|aadhar|pan|driving\\s+licen[cs]e|passport)\\b",
+      "\\b(?:aadhaar|aadhar)\\s*[\\/&]\\s*pan\\b",
+      "\\bpan\\s*[\\/&]\\s*(?:aadhaar|aadhar)\\b",
+      "\\b(?:asking|asks?|wants?|need|needs|requesting|demand|demands|demanding)\\s+(?:for\\s+)?\\s*(?:aadhaar|aadhar|pan)\\b",
+      "\\b(?:provide|give|hand\\s+over)\\s+(?:your\\s+|the\\s+)?(?:aadhaar|aadhar|pan|otp|bank\\s+(?:details|account))\\b"
+    ],
+    "bank_or_card_details_requested": [
+      "\\bsend\\s+(your\\s+)?(bank|account)\\s+(details|number|info)\\b",
+      "\\bshare\\s+(your\\s+)?(bank|account)\\s+(details|number)\\b",
+      "\\b(debit|credit)\\s+card\\s+(number|details|cvv)\\b",
+      "\\bcvv\\b",
+      "\\bupi\\s+pin\\b",
+      "\\bnet[- ]?banking\\s+(login|credentials|password)\\b"
+    ],
+    "otp_requested": [
+      "\\bsend\\s+(me\\s+)?(the\\s+)?otp\\b",
+      "\\bshare\\s+(the\\s+)?otp\\b",
+      "\\btell\\s+me\\s+(the\\s+)?otp\\b",
+      "\\bgive\\s+(me\\s+)?(the\\s+)?otp\\b"
+    ],
+
+    "urgency_pressure": [
+      "\\btoday\\s+only\\b",
+      "\\blast\\s+(day|chance)\\b",
+      "\\blimited\\s+(slots|seats|time|offer)\\b",
+      "\\bonly\\s+\\d+\\s+(slots|seats|left|remaining)\\b",
+      "\\bact\\s+(fast|now|quickly)\\b",
+      "\\bhurry\\s+up\\b",
+      "\\bbefore\\s+(eod|midnight|tomorrow)\\b",
+      "\\bexpires?\\s+(today|in\\s+\\d+\\s+(min|hour))\\b",
+      "\\boffer\\s+ends?\\s+(today|tonight|soon)\\b"
+    ],
+    "threat_or_arrest_language": [
+      "\\barrest(ed)?\\b",
+      "\\bdigital\\s+arrest\\b",
+      "\\b(fir|f\\.i\\.r)\\b",
+      "\\b(cbi|ed|enforcement\\s+directorate)\\b",
+      "\\bpolice\\s+(case|complaint|action)\\b",
+      "\\blegal\\s+action\\b",
+      "\\bjail\\b",
+      "\\bblacklist(ed)?\\b"
+    ],
+    "secrecy_demanded": [
+      "\\bdon'?t\\s+tell\\s+(any\\s*one|anyone|family|police)\\b",
+      "\\bkeep\\s+(it|this)\\s+(confidential|secret|private)\\b",
+      "\\bdo\\s+not\\s+share\\s+with\\s+(anyone|any\\s*one)\\b"
+    ],
+
+    "guaranteed_returns": [
+      "\\bguarantee[d]?\\s+(returns?|profit|income|earnings?)\\b",
+      "\\b(100|fixed)\\s*%?\\s+(guaranteed|sure)\\s+(profit|return)\\b",
+      "\\bsure\\s*shot\\s+(profit|return|tip)\\b",
+      "\\bno\\s+risk\\b",
+      "\\brisk[- ]?free\\s+(returns?|investment|profit)\\b"
+    ],
+    "crypto_or_trading_app_mentioned": [
+      "\\b(bitcoin|btc|crypto|usdt|tether|ethereum|eth)\\b",
+      "\\bbinance\\b",
+      "\\b(forex|fx)\\s+trading\\b",
+      "\\btrading\\s+(app|platform|signal|tip)\\b",
+      "\\bipo\\s+(tip|allotment|grey\\s+market)\\b",
+      "\\bstock\\s+(tip|tip\\s+today|target)\\b"
+    ],
+    "daily_or_weekly_fixed_returns": [
+      "\\b(daily|weekly|monthly)\\s+(returns?|profit|income|payout)\\b",
+      "\\b\\d+\\s*%\\s+(daily|weekly|monthly|per\\s+day|per\\s+week)\\b",
+      "\\b(double|triple)\\s+(your\\s+)?(money|investment)\\b"
+    ],
+    "prize_or_lottery_won": [
+      "\\byou\\s+have\\s+won\\b",
+      "\\bcongratulations[!,. ]*you\\b",
+      "\\blucky\\s+winner\\b",
+      "\\blottery\\s+(winner|prize)\\b",
+      "\\bgift\\s+(prize|reward|hamper)\\b"
+    ],
+
+    "link_to_unknown_short_url": [
+      "\\bbit\\.ly/",
+      "\\btinyurl\\.com/",
+      "\\bcutt\\.ly/",
+      "\\brb\\.gy/",
+      "\\bshorturl\\.at/",
+      "\\bt\\.co/"
+    ],
+    "apk_install_request": [
+      "\\binstall\\s+(this\\s+)?app(lication)?\\b.*\\.apk",
+      "\\bdownload\\s+(this\\s+)?apk\\b",
+      "\\binstall\\s+(this\\s+)?\\.apk\\b",
+      "\\bsideload\\b"
+    ],
+
+    "guaranteed_high_returns": [
+      "\\bguarantee[d]?\\s+(?:high\\s+|fixed\\s+|sure\\s+|assured\\s+)?(?:returns?|profit|income|earnings?)\\b",
+      "\\bassured\\s+(?:returns?|profit|gains?)\\b",
+      "\\bfixed\\s+returns?\\b",
+      "\\b(?:100|hundred)\\s*%?\\s*(?:safe|guaranteed|assured)\\s+investment\\b",
+      "\\bdouble\\s+(?:your\\s+)?(?:money|investment|capital)\\b",
+      "\\bsure\\s*shot\\s+(?:profit|returns?|tip|gains?)\\b",
+      "\\bno\\s+risk\\s+(?:trading|investment|returns?)\\b",
+      "\\brisk[- ]?free\\s+(?:returns?|investment|profit)\\b",
+      "\\bguaranteed\\s+\\d+(?:\\.\\d+)?\\s*%\\s+(?:returns?|profit|gains?)\\b",
+      "\\b\\d+(?:\\.\\d+)?\\s*%\\s+(?:returns?|profit|gains?)\\s+(?:on|in|within|per|guaranteed|assured)\\b",
+      "\\b\\d+(?:\\.\\d+)?\\s*%\\s+(?:guaranteed|assured|sure)\\b",
+      "\\b\\d+(?:\\.\\d+)?\\s*%\\s+returns?\\b(?!\\s+rate)",
+      "\\b(?:promising|promised|will\\s+give|will\\s+earn)\\s+(?:you\\s+)?\\d+(?:\\.\\d+)?\\s*%\\b",
+      "\\b\\d+x\\s+(?:returns?|profit|gains?)\\b"
+    ],
+
+    "unsolicited_contact": [
+      "\\bsomeone\\s+(contacted|messaged|called|texted|whatsapp(?:ed)?)\\s+me\\b",
+      "\\b(?:got|received|i\\s+got|i\\s+received)\\s+(?:a|an|this)\\s+(?:message|sms|whats\\s*app|call|email|text)\\b",
+      "\\bthey\\s+(?:sent|messaged|whats\\s*app(?:ed)?|called|texted)\\s+me\\b",
+      "\\bunknown\\s+(?:number|person|caller)\\b",
+      "\\brandom\\s+(?:number|person|message)\\b",
+      "\\bwe\\s+found\\s+(?:your\\s+)?(?:cv|resume|profile|number|contact)\\b",
+      "\\byou\\s+have\\s+been\\s+(?:shortlisted|selected|chosen)\\b",
+      "\\b(?:didn'?t|did\\s+not)\\s+apply\\b",
+      "\\b(?:didn'?t|did\\s+not)\\s+(?:know|expect)\\s+(?:them|this)\\b"
+    ],
+
+    "screenshots_of_profits": [
+      "\\bprofit\\s+screenshots?\\b",
+      "\\b(?:see|attached)\\s+(?:my\\s+|the\\s+)?(?:profit|earning|payout)\\s+screenshots?\\b",
+      "\\bscreenshots?\\s+of\\s+(?:profit|earnings?|payouts?|withdrawals?)\\b",
+      "\\bproof\\s+of\\s+(?:earnings?|profit|withdrawal)\\b",
+      "\\bmade\\s+(?:rs\\.?\\s*|₹\\s*)?\\d+\\s+(?:in|within)\\s+(?:one\\s+|a\\s+)?(?:day|week|month|hour)\\b",
+      "\\bearned\\s+(?:rs\\.?\\s*|₹\\s*)?\\d+\\s+(?:in|within)\\s+(?:one\\s+|a\\s+)?(?:day|week|month|hour)\\b"
+    ],
+
+    "mentions_indian_bank": [
+      "\\b(?:sbi|state\\s+bank|hdfc|icici|axis|kotak|yes\\s+bank|idfc|indus\\s*ind|punjab\\s+national|pnb|canara|bob|bank\\s+of\\s+baroda|bank\\s+of\\s+india|union\\s+bank|federal\\s+bank|rbl)\\b"
+    ],
+
+    "mentions_legitimate_finance_product": [
+      "\\bfixed\\s+deposit\\b",
+      "\\b\\bfd\\s+(?:rate|interest|account)\\b",
+      "\\bmutual\\s+fund(?:s)?\\b",
+      "\\bsip\\s+(?:in|of|amount|debit|reminder)\\b",
+      "\\b\\d+(?:\\.\\d+)?\\s*%\\s+interest\\b",
+      "\\binterest\\s+rate\\b",
+      "\\bemi\\s+(?:of|due|payment)\\b",
+      "\\bt\\s*&\\s*c\\s+apply\\b",
+      "\\bterms?\\s+and\\s+conditions?\\b"
+    ]
+  },
+
+  "red_flag_rules": [
+    {
+      "id": "common_otp_request",
+      "requires_any": ["otp_requested"],
+      "red_flag": "They are asking for an OTP. No genuine company, bank, or government office ever asks for your OTP. Sharing it gives them access to your account.",
+      "severity": "high"
+    },
+    {
+      "id": "common_bank_details_request",
+      "requires_any": ["bank_or_card_details_requested"],
+      "red_flag": "They are asking for bank, card or UPI PIN details. Genuine employers, lenders and delivery agents never need these.",
+      "severity": "high"
+    },
+    {
+      "id": "common_threat_language",
+      "requires_any": ["threat_or_arrest_language"],
+      "red_flag": "The message uses threats of arrest, FIR, or police action. This is a classic 'digital arrest' / impersonation scam tactic. Real police never demand money over phone or WhatsApp.",
+      "severity": "high"
+    },
+    {
+      "id": "common_aadhaar_pan_request",
+      "requires_any": ["personal_docs_requested"],
+      "red_flag": "They are asking you to send a copy or photo of Aadhaar / PAN. Don't share. These can be used to open fake accounts in your name.",
+      "severity": "high"
+    },
+    {
+      "id": "common_urgency",
+      "requires_any": ["urgency_pressure"],
+      "red_flag": "They are pressuring you to decide or pay quickly ('today only', 'limited slots', 'act fast'). Urgency is used to stop you from thinking or asking someone you trust.",
+      "severity": "medium"
+    },
+    {
+      "id": "common_secrecy",
+      "requires_any": ["secrecy_demanded"],
+      "red_flag": "They are asking you to keep it secret or not tell family. Genuine offers welcome you double-checking with people you trust.",
+      "severity": "medium"
+    },
+    {
+      "id": "common_offplatform_whatsapp",
+      "requires_any": ["whatsapp_only_contact"],
+      "red_flag": "They insist on WhatsApp-only contact. Real companies have offices, websites and verified channels — they don't operate exclusively on personal WhatsApp.",
+      "severity": "low"
+    },
+    {
+      "id": "common_offplatform_telegram",
+      "requires_any": ["telegram_only_contact"],
+      "red_flag": "They are pushing you to a Telegram group or channel. Most India-based investment / job / task scams operate via Telegram because the platform is hard to track.",
+      "severity": "medium"
+    },
+    {
+      "id": "common_short_url",
+      "requires_any": ["link_to_unknown_short_url"],
+      "red_flag": "The message uses a shortened link (bit.ly, tinyurl, etc.) which hides the actual destination. Don't click — it could install spyware or open a phishing page.",
+      "severity": "medium"
+    },
+    {
+      "id": "common_apk",
+      "requires_any": ["apk_install_request"],
+      "red_flag": "They are asking you to install a .apk file outside the Play Store. This is the most common way of installing spyware that drains your bank account.",
+      "severity": "high"
+    },
+    {
+      "id": "common_prize_won",
+      "requires_any": ["prize_or_lottery_won"],
+      "red_flag": "Unsolicited 'you have won' / 'lucky winner' messages are almost always scams. You did not enter a contest you don't remember entering.",
+      "severity": "high"
+    }
+  ],
+
+  "common_next_steps": [
+    "Do NOT pay any money, however small the amount.",
+    "Do NOT share OTP, Aadhaar, PAN, bank details or photos of ID.",
+    "Block the sender's number and report the chat as spam.",
+    "If you have already paid or shared details, call the cyber crime helpline 1930 immediately and file a complaint at https://cybercrime.gov.in.",
+    "Talk to a family member or someone you trust before doing anything more."
+  ]
+}
